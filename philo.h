@@ -44,6 +44,7 @@ typedef struct s_philo
 	t_data			*data;
 	u_int64_t		last_meal;
 	pthread_t		thread;
+	pthread_mutex_t *meals_mutex;
 	pthread_mutex_t	*first_f;
 	pthread_mutex_t	*second_f;
 } t_philo;

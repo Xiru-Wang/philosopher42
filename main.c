@@ -12,8 +12,8 @@ int	main(int ac, char *av)
 		init_data(&data, av);
 		init_philos(philos, &data);
 		init_forks(forks, &data);
-		thread_create(philos);
-		//clean_data(&data);
+		dinner_start(&data, philos);//include thread_creat
+		destroy_all(&data, philos, forks);
 	}
 	else
 	{

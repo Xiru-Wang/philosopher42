@@ -39,6 +39,7 @@ void	init_philo(t_philo *philos, pthread_mutex_t *forks)
 	{
 		philos[i].id = i + 1;
 		philos[i].count_meals = 0;
+		pthread_mutex_init(philo[i]->meals_mutex, NULL);
 		assign_forks(&philos[i], forks);//a pointer to a specific struct
 		philos[i].last_meal = get_time();
 		i++;

@@ -33,8 +33,14 @@ int	join_philo_threads(t_philo *philos)
 
 void	thread_create(t_philo *philos)
 {
+	pthread_t	monitor_thread;
+
+	if (pthread_create(&monitor_thread, NULL, &monitor, philos) != 0)
+		handle_error("monitor thread create failed");
 	if (create_philo_threads(philos) == FAIL)
-		handle_error("threads create failed");
+		handle_error("philos threads create failed");
+	//destroy??
 	if (join_philo_threads(philos) == FAIL)
-		handle_error("threads join failed");
+		handle_error("philos threads join failed");
+	//destroy?
 }
