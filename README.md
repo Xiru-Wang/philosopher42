@@ -52,13 +52,13 @@ To prevent race conditions, we can use mutexes (mutual exclusions) to ensure tha
 ````
 //share resource
 u_int64_t ledger = 0;
-pthread_mutex_t ledger_lock;
+pthread_mutex_t ledger_lock;//👈
 
 void *update_ledger(void *data)
 {
-	pthread_mutex_lock(&ledger_lock);//lock
+	pthread_mutex_lock(&ledger_lock);//lock👈
 	ledger += 1;
-	pthread_mutex_unlock(&ledger_lock);//unlock
+	pthread_mutex_unlock(&ledger_lock);//unlock👈
 	return (NULL);
 }
 
@@ -67,7 +67,7 @@ int main()
 	pthread_t thread[MAX];
 
 	int i = 0;
-	pthread_mutex_init(&ledger_lock, NULL);//create lock
+	pthread_mutex_init(&ledger_lock, NULL);//create lock👈
 	while (i < MAX)
 	{
 		if (pthread_create(&thread[i], NULL, update_ledger, NULL) != 0)
@@ -82,7 +82,7 @@ int main()
 		i++;
 	}
 	printf("%llu\n", ledger);
-	pthread_mutex_destroy(&ledger_lock);//destroy lock
+	pthread_mutex_destroy(&ledger_lock);//destroy lock👈
 	return (0);
 }
 ````
