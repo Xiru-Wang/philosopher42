@@ -25,6 +25,14 @@ int	if_game_over(t_data *data)
 	return (status);
 }
 
+int	if_one_full(t_philo *philo)
+{
+	int	status;
+
+	status = check_mutex(&philo->philo_mutex, &philo->is_full);
+	return (status);
+}
+
 void	destroy_mutexes(t_data *data)
 {
 	int	i;
@@ -40,7 +48,7 @@ void	destroy_mutexes(t_data *data)
 }
 
 
-u_int64_t	get_time(void)
+long	get_time(void)
 {
 	struct timeval	tv;//struct to save time
 

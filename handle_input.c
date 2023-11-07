@@ -58,7 +58,7 @@ static long	atoi_long(char *s)
 	return (res);
 }
 
-int parse_input(t_data *data, char **av)
+int	parse_input(t_data *data, char **av)
 {
 	data->num_philos = atoi_long(av[1]);
 	if (data->num_philos > PHILO_MAX || data->num_philos < 1)

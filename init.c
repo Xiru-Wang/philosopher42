@@ -1,6 +1,6 @@
 #include "philo.h"
 
-static void assign_forks(t_philo *philo, t_fork *forks);
+static void	assign_forks(t_philo *philo, t_fork *forks);
 static void init_philos(t_data *data);
 
 void	init_data(t_data *data)
@@ -33,7 +33,7 @@ static void	init_philos(t_data *data)
 		data->philos[i].id = i + 1;
 		data->philos[i].meals = 0;
 		data->philos[i].is_full = NO;
-		data->philos[i].last_meal_time = get_time();
+		//data->philos[i].last_meal_time = get_time();
 		pthread_mutex_init(&data->philos[i].philo_mutex, NULL);
 		assign_forks(&data->philos[i], data->forks);
 		i++;
