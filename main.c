@@ -1,24 +1,21 @@
 #include "philo.h"
 
-int	main(int ac, char *av)
+int	main(int ac, char **av)
 {
-	t_data	data;//Stack allocation, automatic storage duration
-
-	t_philo	philos[PHILO_MAX];
-	pthread_mutex_t	forks[PHILO_MAX];
+	t_data	data;
 
 	if (ac == 5 || ac == 6)
 	{
-		init_data(&data, av);
-		init_philos(philos, &data);
-		init_forks(forks, &data);
-		dinner_start(&data, philos);//include thread_creat
-		destroy_all(&data, philos, forks);
+		if (check_input(av) == ERROR)
+			return (ERROR);
+		if (parse_input(&data, av) == ERROR)
+			return (ERROR);
+		init_data(&data);
+		start_threads(&data);
+		destroy_mutexes(&data);
 	}
 	else
-	{
-		printf("Wrong input\n");
-		printf("./philo 5 800 200 200 7(optional)\n");
-		exit(1);
-	}
+		printf("./philo 5 800 150 150 [8]\n");
+
+	return (0);
 }
