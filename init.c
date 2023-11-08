@@ -1,26 +1,30 @@
 #include "philo.h"
 
+//https://github.com/suspectedoceano/dining_philosophers/blob/main/init.c
+
 static void	assign_forks(t_philo *philo, t_fork *forks);
 static void init_philos(t_data *data);
 
-void	init_data(t_data *data)
+int	init_data(t_data *data)
 {
 	int i;
 
 	i = 0;
+	data->philos = malloc(sizeof(t_philo) * data->num_philos);
+	data->forks = malloc(sizeof(t_fork) * data->num_philos);
+	if (!data->philos || !data->forks)
+		return (ft_return("Malloc Error"));
 	while (i < data->num_philos)
 	{
 		pthread_mutex_init(&data->forks[i].fork_mutex, NULL);
-		data->forks[i].fork_id = i;
+		data->forks[i].fork_id = i;//do i need?
 		i++;
 	}
-	//data->is_dead = NO;
-	//data->all_full = NO;
-	//data->game_start = get_time();
 	data->all_ready = NO;
 	data->game_over = NO;
 	pthread_mutex_init(&data->data_mutex, NULL);
 	init_philos(data);
+	return (SUCCESS);
 }
 
 static void	init_philos(t_data *data)
@@ -33,7 +37,7 @@ static void	init_philos(t_data *data)
 		data->philos[i].id = i + 1;
 		data->philos[i].meals = 0;
 		data->philos[i].is_full = NO;
-		//data->philos[i].last_meal_time = get_time();
+		//data->philos[i].data = data;??？？
 		pthread_mutex_init(&data->philos[i].philo_mutex, NULL);
 		assign_forks(&data->philos[i], data->forks);
 		i++;

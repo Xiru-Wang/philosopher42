@@ -1,5 +1,11 @@
 #include "philo.h"
 
+int	ft_return(char *s)
+{
+	printf("%s\n", s);
+	return (ERROR);
+}
+
 void	change_mutex(pthread_t *mutex, int *value, int status)
 {
 	pthread_mutex_lock(mutex);
