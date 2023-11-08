@@ -55,6 +55,8 @@ static long	atoi_long(char *s)
 		res = res * 10 + (*s - '0');
 		s++;
 	}
+	// if (res > LONG_MAX)
+	// 	ft_return("Num is toooo big");
 	return (res);
 }
 

@@ -6,37 +6,30 @@ int	ft_return(char *s)
 	return (ERROR);
 }
 
-void	change_mutex(pthread_t *mutex, int *value, int status)
+//full:skip message
+//alive: print eat sleep think
+//dead: print die
+void	print_msg(t_philo *philo, char *s)
 {
-	pthread_mutex_lock(mutex);
-	*value = status;//update value
-	pthread_mutex_unlcok(mutex);
+	long	time;
+
+	if (check_mutex(&philo->philo_mutex, &philo->is_full) == YES)
+		return ;
+	pthread_mutex_lock(&philo->data->data_mutex);
+	time = get_time() - philo->data->game_start_time;
+	if (if_game_over(philo->data) != YES)//print eat sleep think
+		printf("%ld %d %s\n", time, philo->id, s);
+	else // if one died, print death
+		printf("%ld %d %s\n", time, philo->id, s);
+	pthread_mutex_unlock(&philo->data->data_mutex);
 }
 
-int	check_mutex(pthread_t *mutex, int *value)
+long	get_time(void)
 {
-	int	status;
+	struct timeval	tv;//struct to save time
 
-	pthread_mutex_lock(mutex);
-	status = *value;//get value
-	pthread_mutex_unlcok(mutex);
-	return (status);
-}
-
-int	if_game_over(t_data *data)
-{
-	int	status;
-
-	status = check_mutex(&data->data_mutex, &data->game_over);
-	return (status);
-}
-
-int	if_one_full(t_philo *philo)
-{
-	int	status;
-
-	status = check_mutex(&philo->philo_mutex, &philo->is_full);
-	return (status);
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000); // convert to millisec
 }
 
 void	destroy_mutexes(t_data *data)
@@ -51,13 +44,4 @@ void	destroy_mutexes(t_data *data)
 		i++;
 	}
 	pthread_mutex_destroy(&data->data_mutex);
-}
-
-
-long	get_time(void)
-{
-	struct timeval	tv;//struct to save time
-
-	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000); // convert to millisec
 }

@@ -5,6 +5,8 @@
 static void	assign_forks(t_philo *philo, t_fork *forks);
 static void init_philos(t_data *data);
 
+//init data, create mutex for forks
+
 int	init_data(t_data *data)
 {
 	int i;
@@ -27,6 +29,7 @@ int	init_data(t_data *data)
 	return (SUCCESS);
 }
 
+//init lock for each philo
 static void	init_philos(t_data *data)
 {
 	int		i;
@@ -34,12 +37,12 @@ static void	init_philos(t_data *data)
 	i = 0;
 	while( i < data->num_philos)
 	{
+		data->philos[i].data = data;
 		data->philos[i].id = i + 1;
-		data->philos[i].meals = 0;
 		data->philos[i].is_full = NO;
-		//data->philos[i].data = data;??？？
+		data->philos[i].meals = 0;
 		pthread_mutex_init(&data->philos[i].philo_mutex, NULL);
-		assign_forks(&data->philos[i], data->forks);
+		assign_forks(&data->philos[i], data->forks);//with &??address of forks??
 		i++;
 	}
 }

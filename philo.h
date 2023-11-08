@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <sys/time.h>
+ #include <unistd.h>//usleep
 //#include <stdint.h>
 
 # define TAKE_FORK "has taken a fork"
@@ -59,9 +60,24 @@ int		check_input(char **av);
 int		parse_input(t_data *data, char **av);
 //utils
 int		ft_return(char *s);
-void	change_mutex(pthread_t *mutex, int *value, int status);
-int		check_mutex(pthread_t *mutex, int *value);
+void	print_msg(t_philo *philo, char *s);
+long	get_time(void);
+void	destroy_mutexes(t_data *data);
+//init
+int		init_data(t_data *data);
+//check_status
+void	change_mutex(pthread_mutex_t *lock, int *value, int status);
+int		check_mutex(pthread_mutex_t *lock, int *value);
 int		if_game_over(t_data *data);
 int		if_one_full(t_philo *philo);
-void	destroy_mutexes(t_data *data);
-long	get_time(void);
+int		if_one_dies(t_philo *philo);
+//threads
+void	start_threads(t_data *data);
+void	*die_lonely(void *ptr);
+void	*routine(void *ptr);
+void	*monitor(void *ptr);
+//eat_sleep_think
+void	eating(t_philo *philo);
+void	sleeping(t_philo *philo);
+void	thinking(t_philo *philo);
+
