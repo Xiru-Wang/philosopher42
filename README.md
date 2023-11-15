@@ -1,9 +1,25 @@
 # philosopher42
+Brief
+The Dining Philosophers problem is a classic practice exercise in computer science for understanding and dealing with concurrency issues in multi-threading environments. 
 
-Threads might run concurrently and not completely parallel
+The problem illustrates synchronization issues and techniques for resolving them. It involves a certain number of philosophers seated around a circular table, and the challenge is to design a protocol that allows them to eat and think without running into deadlocks (where they are stuck waiting indefinitely) or resource starvation (where one or more philosophers are unable to access the resources they need to continue).
+
+Each philosopher alternates between thinking and eating. To eat, a philosopher must have two forks (or resources), one from their left and one from their right, but each fork is shared with a neighbor. The problem becomes how to devise a strategy where philosophers do not deadlock (waiting indefinitely for a fork) and do not starve (being forever denied access to a fork).
+
+# Philos = Array, Forks = Array
+![14](https://github.com/Xiru-Wang/philosopher42/assets/79924696/e87ed4f1-203f-48b6-acfd-5e5771e6e107)
+
+# Deadlock Prevention
+![15](https://github.com/Xiru-Wang/philosopher42/assets/79924696/c9a2b8c4-7855-4222-98ad-adbe8f82dcc2)
+![16](https://github.com/Xiru-Wang/philosopher42/assets/79924696/6941f670-88cf-4325-a8e5-6a05ed55b033)
+
+# Thread vs Process
+![17](https://github.com/Xiru-Wang/philosopher42/assets/79924696/e0209629-c52d-4b9c-9747-9a9b8449294a)
+
+# Concurrently vs Parallel
 ![image](https://github.com/Xiru-Wang/philosopher42/assets/79924696/04a4276a-a59f-429d-8e95-a22a4ab5cd44)
 
-# Race Condition
+# Race Condition & Mutex
 
 Since threads share the same memory space within a process, they can access and modify the same variables and data structures. Without proper synchronization mechanisms, multiple threads could attempt to read and write to the same data simultaneously. This situation is known as a “race condition”, and it can lead to inconsistencies and unpredictable behaviors.
 
