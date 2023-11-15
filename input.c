@@ -6,24 +6,15 @@ static int	all_num(char *s)
 
 	i = 0;
 	if (s[0] == '0')
-	{
-		printf("bigger than 0 plz\n");
-		return (ERROR);
-	}
+		ft_return("bigger than 0 plz");
 	while (s[i])
 	{
 		if (s[i] == '-' || s[i] < '0' || s[i] > '9')
-		{
-			printf("positive only && numbers only\n");
-			return (ERROR);
-		}
+			ft_return("positive only && numbers only");
 		i++;
 	}
 	if (i > 10)
-	{
-		printf("number is too big\n");
-			return (ERROR);
-	}
+		ft_return("number is too big");
 	return (SUCCESS);
 }
 
@@ -55,8 +46,6 @@ static long	atoi_long(char *s)
 		res = res * 10 + (*s - '0');
 		s++;
 	}
-	// if (res > LONG_MAX)
-	// 	ft_return("Num is toooo big");
 	return (res);
 }
 
@@ -64,22 +53,16 @@ int	parse_input(t_data *data, char **av)
 {
 	data->num_philos = atoi_long(av[1]);
 	if (data->num_philos > PHILO_MAX || data->num_philos < 1)
-	{
-		printf("number of philos: 1 to 200\n");
-		return (ERROR);
-	}
+		ft_return("number of philos: 1 to 200");
 	data->time_to_die = atoi_long(av[2]);
 	data->time_to_eat = atoi_long(av[3]);
 	data->time_to_sleep = atoi_long(av[4]);
 	if (data->time_to_die < 60 ||data->time_to_eat < 60
-		|| data->time_to_sleep < 60)//why??
-	{
-		printf("timestamp >= 60 milliseconds\n");
-		return (ERROR);
-	}
+		|| data->time_to_sleep < 60)
+		ft_return("timestamp >= 60 milliseconds");
 	if (av[5])
 		data->meals_must_have = atoi_long(av[5]);
 	else
-		data->meals_must_have = -1;
+		data->meals_must_have = -2;
 	return (SUCCESS);
 }
