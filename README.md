@@ -6,6 +6,12 @@ The problem illustrates synchronization issues and techniques for resolving them
 
 Each philosopher alternates between thinking and eating. To eat, a philosopher must have two forks (or resources), one from their left and one from their right, but each fork is shared with a neighbor. The problem becomes how to devise a strategy where philosophers do not deadlock (waiting indefinitely for a fork) and do not starve (being forever denied access to a fork).
 
+# Some thoughts...
+1. If (time_to_die < 2 * time_to_eat), DIE
+2. Without thinking time, after philos reach certain meals（70-80 times of the simulation）, meals distribute unfairly and lead to one philo die
+3. Philo-5 (if we have 5 philos) eat as long as the second fork is available (had too many unnecessary meals)
+4. How should we control the thinking time??🤔 the best scenario: thinking = time_to_die - eating - sleeping (minus some buffer time for the operating system), then start to eat immediately.
+
 # Philos = Array, Forks = Array
 ![14](https://github.com/Xiru-Wang/philosopher42/assets/79924696/e87ed4f1-203f-48b6-acfd-5e5771e6e107)
 
