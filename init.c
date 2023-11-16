@@ -20,6 +20,7 @@ int	init_data(t_data *data)
 	}
 	data->all_ready = NO;
 	data->game_over = NO;
+	data->time_to_think = data->time_to_die - data->time_to_eat - data->time_to_sleep;
 	pthread_mutex_init(&data->all_ready_mutex, NULL);
 	pthread_mutex_init(&data->print_mutex, NULL);
 	pthread_mutex_init(&data->game_over_mutex, NULL);

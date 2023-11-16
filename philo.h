@@ -51,6 +51,7 @@ struct s_data
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
+	long			time_to_think;
 	int				meals_must_have;
 	int				all_ready; // flag, if all_ready == YES, game start
 	long			game_start_time;

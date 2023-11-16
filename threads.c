@@ -68,7 +68,7 @@ static void	*routine(void *ptr)
 			&philo->data->all_ready) == YES)
 			break ;
 	if (philo->id % 2 == 1)
-		ft_usleep(100);
+		ft_usleep(1);
 	while (if_game_over(philo->data) == NO)
 	{
 		eating(philo);
@@ -77,7 +77,11 @@ static void	*routine(void *ptr)
 			return (NULL);//to ensure this philo finished its food
 		ft_usleep(philo->data->time_to_sleep);
 		print_msg(philo, THINK);
-		//ft_usleep(0.2 * philo->data->time_to_eat);
+		if (philo->data->time_to_think > 5)//5 should be enough to switch fork
+			ft_usleep(philo->data->time_to_think * 0.8);//buffer
+		//if we dont have thinking time, after 75 meals,
+		//philo5 will have more meals than others and lead to 2/4 die
+		//by add the thinking time, we keep a bit of buffer so that 5 will not eat as soon as fork avalable
 	}
 	return (NULL);
 }
