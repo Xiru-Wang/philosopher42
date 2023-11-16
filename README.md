@@ -17,6 +17,8 @@ Each philosopher alternates between thinking and eating. To eat, a philosopher m
 ![17](https://github.com/Xiru-Wang/philosopher42/assets/79924696/e0209629-c52d-4b9c-9747-9a9b8449294a)
 
 # Concurrently vs Parallel
+![concurently](https://github.com/Xiru-Wang/philosopher42/assets/79924696/642028d6-2bdb-4b6f-b82a-9197e2e2c5a8)
+
 ![image](https://github.com/Xiru-Wang/philosopher42/assets/79924696/04a4276a-a59f-429d-8e95-a22a4ab5cd44)
 
 # Race Condition & Mutex
@@ -102,3 +104,29 @@ int main()
 	return (0);
 }
 ````
+
+# Notes
+
+Process:
+- Each process has its own memory address space (code + data + heap + stack)
+- ✅ One process cannot corrupt the mem space of another process (one process malfunctions, others keep running)
+
+Thread:
+- A thread is the unit of execution within a process || a basic unit of CPU utilization
+- A process has at least 1 thread (main thread)
+- Each thread has its own stack
+- ✅ Threads within one process share memory address space, that's why threads can communicate with each other
+- ❌ However, one misbehaving thread could bring down the entire process
+
+  Advantages:
+  1. Concurrently
+  2. Resource sharing
+  3. Efficiency
+  4. Responsiveness
+
+  Disadvantages:
+  1. Synchronization complexity
+  2. Data condition and deadlocks
+  3. Debugging Difficulties
+  4. Design Complexity
+  5. Malfunctions
