@@ -24,3 +24,10 @@ int	if_game_over(t_data *data)
 	status = check_mutex(&data->game_over_mutex, &data->game_over);
 	return (status);
 }
+
+void	update_last_meal_time(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->meal_time_mutex);
+	philo->last_meal_time = get_time();
+	pthread_mutex_unlock(&philo->meal_time_mutex);
+}

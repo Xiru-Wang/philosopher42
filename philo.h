@@ -78,6 +78,7 @@ int		init_data(t_data *data);
 void	change_mutex(pthread_mutex_t *lock, int *value, int status);
 int		check_mutex(pthread_mutex_t *lock, int *value);
 int		if_game_over(t_data *data);
+void	update_last_meal_time(t_philo *philo);
 // threads
 int		start_threads(t_data *data);
 void	destroy_mutexes(t_data *data);

@@ -25,6 +25,7 @@ int	init_data(t_data *data)
 	pthread_mutex_init(&data->print_mutex, NULL);
 	pthread_mutex_init(&data->game_over_mutex, NULL);
 	init_philos(data);
+	data->game_start_time = get_time();//try [helgring]
 	return (SUCCESS);
 }
 

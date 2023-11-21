@@ -28,7 +28,7 @@ int	start_threads(t_data *data)
 	}
 	if (pthread_create(&data->thread_monitor, NULL, monitor, data))
 		return (ft_return("pthread_create monitor failed"));
-	data->game_start_time = get_time();
+	data->game_start_time = get_time();//update time
 	change_mutex(&data->all_ready_mutex, &data->all_ready, YES);
 	i = -1;
 	//calling thread will be blocked until philos threads complete its execution
@@ -45,11 +45,14 @@ static void	*die_lonely(void *ptr)
 	t_philo	*philo;
 
 	philo = (t_philo *)ptr;
-	while (1)
-		if (check_mutex(&philo->data->all_ready_mutex,
-			&philo->data->all_ready) == YES)
-			break ;
-	philo->last_meal_time = get_time();
+	// while (1)
+	// 	if (check_mutex(&philo->data->all_ready_mutex,
+	// 		&philo->data->all_ready) == YES)
+	// 		break ;
+	while (check_mutex(&philo->data->all_ready_mutex,
+			&philo->data->all_ready) == NO)
+		usleep(100);//try [Helgrind]
+	update_last_meal_time(philo);
 	pthread_mutex_lock(&philo->first_f->fork_mutex);
 	print_msg(philo, TAKE_FORK);
 	ft_usleep(philo->data->time_to_die);
@@ -63,10 +66,13 @@ static void	*routine(void *ptr)
 
 	philo = (t_philo *)ptr;
 
-	while (1)
-		if (check_mutex(&philo->data->all_ready_mutex,
-			&philo->data->all_ready) == YES)
-			break ;
+	// while (1)
+	// 	if (check_mutex(&philo->data->all_ready_mutex,
+	// 		&philo->data->all_ready) == YES)
+	// 		break ;//waste CPU??
+	while (check_mutex(&philo->data->all_ready_mutex,
+			&philo->data->all_ready) == NO)
+		usleep(100);//try [Helgrind]
 	if (philo->id % 2 == 1)
 		ft_usleep(1);
 	while (if_game_over(philo->data) == NO)
@@ -94,9 +100,7 @@ static void	eating(t_philo *philo)
 		return ;// while waiting for the sec_fork, one phil could die
 	pthread_mutex_lock(&philo->second_f->fork_mutex);
 	print_msg(philo, TAKE_FORK);
-	pthread_mutex_lock(&philo->meal_time_mutex);
-	philo->last_meal_time = get_time();
-	pthread_mutex_unlock(&philo->meal_time_mutex);
+	update_last_meal_time(philo);
 	print_msg(philo, EAT);
 	ft_usleep(philo->data->time_to_eat);
 	pthread_mutex_unlock(&philo->first_f->fork_mutex);
