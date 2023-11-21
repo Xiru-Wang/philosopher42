@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mutex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xiwang <xiwang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/20 18:12:23 by xiwang            #+#    #+#             */
+/*   Updated: 2023/11/21 20:21:34 by xiwang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	change_mutex(pthread_mutex_t *lock, int *value, int status)
 {
 	pthread_mutex_lock(lock);
-	*value = status;//update value
+	*value = status;
 	pthread_mutex_unlock(lock);
 }
 
@@ -12,7 +24,7 @@ int	check_mutex(pthread_mutex_t *lock, int *value)
 	int	status;
 
 	pthread_mutex_lock(lock);
-	status = *value;//get value
+	status = *value;
 	pthread_mutex_unlock(lock);
 	return (status);
 }

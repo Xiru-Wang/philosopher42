@@ -4,7 +4,8 @@ RST=\033[0m
 
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror 
+#-fsanitize=thread -g
 #-g
 
 LIB = philo.h

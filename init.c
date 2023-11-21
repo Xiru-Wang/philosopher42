@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xiwang <xiwang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/20 18:11:52 by xiwang            #+#    #+#             */
+/*   Updated: 2023/11/21 20:14:23 by xiwang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static void	assign_forks(t_philo *philo, t_fork *forks);
-static void init_philos(t_data *data);
+static void	init_philos(t_data *data);
 
 int	init_data(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	data->philos = malloc(sizeof(t_philo) * data->num_philos);
@@ -20,12 +32,13 @@ int	init_data(t_data *data)
 	}
 	data->all_ready = NO;
 	data->game_over = NO;
-	data->time_to_think = data->time_to_die - data->time_to_eat - data->time_to_sleep;
+	data->time_to_think = data->time_to_die - data->time_to_eat 
+		- data->time_to_sleep;
 	pthread_mutex_init(&data->all_ready_mutex, NULL);
 	pthread_mutex_init(&data->print_mutex, NULL);
 	pthread_mutex_init(&data->game_over_mutex, NULL);
 	init_philos(data);
-	data->game_start_time = get_time();//try [helgring]
+	data->game_start_time = get_time();
 	return (SUCCESS);
 }
 
@@ -51,18 +64,17 @@ static void	init_philos(t_data *data)
 
 static void	assign_forks(t_philo *philo, t_fork *forks)
 {
-	int i;
+	int	i;
 
 	i = philo->id;
-
 	if (i % 2 != 0)
 	{
-		philo->first_f = &forks[i % philo->data->num_philos];//left
-		philo->second_f = &forks[i - 1];//right
+		philo->first_f = &forks[i % philo->data->num_philos];
+		philo->second_f = &forks[i - 1];
 	}
 	else
 	{
-		philo->first_f = &forks[i - 1];//right
-		philo->second_f = &forks[i % philo->data->num_philos];//left
+		philo->first_f = &forks[i - 1];
+		philo->second_f = &forks[i % philo->data->num_philos];
 	}
 }

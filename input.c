@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xiwang <xiwang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/20 18:12:00 by xiwang            #+#    #+#             */
+/*   Updated: 2023/11/20 18:15:58 by xiwang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static int	all_num(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (s[0] == '0')
@@ -57,7 +69,7 @@ int	parse_input(t_data *data, char **av)
 	data->time_to_die = atoi_long(av[2]);
 	data->time_to_eat = atoi_long(av[3]);
 	data->time_to_sleep = atoi_long(av[4]);
-	if (data->time_to_die < 60 ||data->time_to_eat < 60
+	if (data->time_to_die < 60 || data->time_to_eat < 60
 		|| data->time_to_sleep < 60)
 		ft_return("timestamp >= 60 milliseconds");
 	if (av[5])

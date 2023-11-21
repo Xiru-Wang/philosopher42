@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xiwang <xiwang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/20 18:13:16 by xiwang            #+#    #+#             */
+/*   Updated: 2023/11/20 18:13:17 by xiwang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	ft_return(char *s)
@@ -11,7 +23,6 @@ static int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	if (n == 0)
 		return (0);
 	while (*s1 && (*s1 == *s2) && --n)
-	// NOT n--, when n == 1, just return s1[0] - s2[0]
 	{
 		s1++;
 		s2++;
@@ -23,8 +34,6 @@ void	print_msg(t_philo *philo, char *s)
 {
 	long	time;
 
-	// if (check_mutex(&philo->is_full_mutex, &philo->is_full) == YES)
-	// 	return ;//delete, so once full, this philo will still print think and sleep
 	pthread_mutex_lock(&philo->data->print_mutex);
 	time = get_time() - philo->data->game_start_time;
 	if (if_game_over(philo->data) == NO)
@@ -51,8 +60,8 @@ int	ft_usleep(size_t milliseconds)
 
 long	get_time(void)
 {
-	struct timeval	tv;//struct to save time
+	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000); // convert to millisec
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }

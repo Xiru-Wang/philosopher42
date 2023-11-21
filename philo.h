@@ -1,21 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xiwang <xiwang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/20 18:12:35 by xiwang            #+#    #+#             */
+/*   Updated: 2023/11/21 20:15:23 by xiwang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
 #include <limits.h>
 #include <sys/time.h>
- #include <unistd.h>//usleep
-//#include <stdint.h>
+#include <unistd.h>//usleep
 
-# define TAKE_FORK "has taken a fork"
-# define EAT "is eating"
-# define SLEEP "is sleeping"
-# define THINK "is thinking"
-# define DIE "died"
+#define TAKE_FORK "has taken a fork"
+#define EAT "is eating"
+#define SLEEP "is sleeping"
+#define THINK "is thinking"
+#define DIE "died"
 
-# define RST    "\033[0m"      /* Reset to default color */
-# define R	"\033[1;31m"   /* Bold Red */
-# define G      "\033[1;32m"   /* Bold Green */
-# define B      "\033[1;34m"
+#define RST    "\033[0m"
+#define R	"\033[1;31m"
+#define G      "\033[1;32m"
+#define B      "\033[1;34m"
 
 #define ERROR -1
 #define SUCCESS 0
@@ -23,7 +34,7 @@
 #define YES 42
 #define NO 24
 
-typedef struct s_data t_data;//forward declaration
+typedef struct s_data	t_data;
 
 typedef struct s_forks
 {
@@ -34,9 +45,9 @@ typedef struct s_forks
 typedef struct s_philo
 {
 	int				id;
-	int				is_full;//share
+	int				is_full;
 	int				meals;
-	long			last_meal_time;//share
+	long			last_meal_time;
 	pthread_t		thread_id;
 	t_fork			*first_f;
 	t_fork			*second_f;
@@ -53,9 +64,9 @@ struct s_data
 	long			time_to_sleep;
 	long			time_to_think;
 	int				meals_must_have;
-	int				all_ready; // flag, if all_ready == YES, game start
+	int				all_ready;
 	long			game_start_time;
-	int				game_over;//share, if one dies || all full
+	int				game_over;
 	t_fork			*forks;
 	t_philo			*philos;
 	pthread_t		thread_monitor;
@@ -79,6 +90,7 @@ void	change_mutex(pthread_mutex_t *lock, int *value, int status);
 int		check_mutex(pthread_mutex_t *lock, int *value);
 int		if_game_over(t_data *data);
 void	update_last_meal_time(t_philo *philo);
+
 // threads
 int		start_threads(t_data *data);
 void	destroy_mutexes(t_data *data);
