@@ -6,7 +6,7 @@
 /*   By: xiwang <xiwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:12:06 by xiwang            #+#    #+#             */
-/*   Updated: 2023/11/21 20:22:11 by xiwang           ###   ########.fr       */
+/*   Updated: 2023/11/23 20:38:27 by xiwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	main(int ac, char **av)
 			return (ft_return("parse_input failed"));
 		if (init_data(data) == ERROR)
 			return (ft_return("init_data failed"));
+		//if (data->meals_must_have == 0) //0 will not pass the input check
+		//	return (ft_return("0 meals"));
 		start_threads(data);
 		print_meals(data);
 		destroy_mutexes(data);

@@ -6,7 +6,7 @@
 /*   By: xiwang <xiwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:12:13 by xiwang            #+#    #+#             */
-/*   Updated: 2023/11/21 20:31:42 by xiwang           ###   ########.fr       */
+/*   Updated: 2023/11/23 18:28:01 by xiwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	if_one_dies(t_philo *philo)
 	starving = philo->data->time_to_die;
 	pthread_mutex_lock(&philo->meal_time_mutex);
 	time = get_time() - philo->last_meal_time;
-	if (time > starving)
+	if (time >= starving)
 	{
 		pthread_mutex_unlock(&philo->meal_time_mutex);
 		return (YES);

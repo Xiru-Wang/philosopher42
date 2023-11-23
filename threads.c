@@ -6,7 +6,7 @@
 /*   By: xiwang <xiwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:13:04 by xiwang            #+#    #+#             */
-/*   Updated: 2023/11/21 20:31:54 by xiwang           ###   ########.fr       */
+/*   Updated: 2023/11/23 20:37:20 by xiwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ int	start_threads(t_data *data)
 	int	i;
 
 	i = -1;
-	if (data->meals_must_have == 0)
-		return (ft_return("0 meals"));
-	else if (data->num_philos == 1)
+	if (data->num_philos == 1)
 	{
 		if (pthread_create(&data->philos[0].thread_id, NULL,
 				die_lonely, &data->philos[0]))
@@ -79,10 +77,12 @@ static void	*routine(void *ptr)
 		print_msg(philo, SLEEP);
 		if (check_mutex(&philo->is_full_mutex, &philo->is_full) == YES)
 			return (NULL);
-		ft_usleep(philo->data->time_to_sleep);
+		if (if_game_over(philo->data) == NO)
+			ft_usleep(philo->data->time_to_sleep);
 		print_msg(philo, THINK);
-		if (philo->data->time_to_think > 5)
-			ft_usleep(philo->data->time_to_think * 0.8);
+		if (if_game_over(philo->data) == NO)//a smarter way?
+			if (philo->data->time_to_think > 5)
+				ft_usleep(philo->data->time_to_think * 0.8);
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror 
 #-fsanitize=thread -g
-#-g
+#detect threading issues during runtime
 
 LIB = philo.h
 SRC = $(wildcard *.c)

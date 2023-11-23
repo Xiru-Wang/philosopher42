@@ -6,7 +6,7 @@
 /*   By: xiwang <xiwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:12:00 by xiwang            #+#    #+#             */
-/*   Updated: 2023/11/20 18:15:58 by xiwang           ###   ########.fr       */
+/*   Updated: 2023/11/23 19:37:27 by xiwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ static int	all_num(char *s)
 
 	i = 0;
 	if (s[0] == '0')
-		ft_return("bigger than 0 plz");
+		return (ft_return("bigger than 0 plz"));
 	while (s[i])
 	{
-		if (s[i] == '-' || s[i] < '0' || s[i] > '9')
-			ft_return("positive only && numbers only");
+		if (s[i] == '-' || (s[i] < '0' || s[i] > '9'))
+			return (ft_return("positive only && numbers only"));
 		i++;
 	}
 	if (i > 10)
-		ft_return("number is too big");
+		return (ft_return("number is too big"));
 	return (SUCCESS);
 }
 
@@ -65,13 +65,13 @@ int	parse_input(t_data *data, char **av)
 {
 	data->num_philos = atoi_long(av[1]);
 	if (data->num_philos > PHILO_MAX || data->num_philos < 1)
-		ft_return("number of philos: 1 to 200");
+		return (ft_return("number of philos: 1 to 200"));
 	data->time_to_die = atoi_long(av[2]);
 	data->time_to_eat = atoi_long(av[3]);
 	data->time_to_sleep = atoi_long(av[4]);
 	if (data->time_to_die < 60 || data->time_to_eat < 60
 		|| data->time_to_sleep < 60)
-		ft_return("timestamp >= 60 milliseconds");
+		return (ft_return("timestamp >= 60 milliseconds"));
 	if (av[5])
 		data->meals_must_have = atoi_long(av[5]);
 	else
