@@ -6,7 +6,7 @@
 /*   By: xiwang <xiwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:12:35 by xiwang            #+#    #+#             */
-/*   Updated: 2023/11/23 15:13:24 by xiwang           ###   ########.fr       */
+/*   Updated: 2023/11/24 19:28:46 by xiwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,10 @@ void	change_mutex(pthread_mutex_t *lock, int *value, int status);
 int		check_mutex(pthread_mutex_t *lock, int *value);
 int		if_game_over(t_data *data);
 void	update_last_meal_time(t_philo *philo);
-
 // threads
 int		start_threads(t_data *data);
 void	destroy_mutexes(t_data *data);
 //monitor
 void	*monitor(void *ptr);
+//routine
+void	*routine(void *ptr);

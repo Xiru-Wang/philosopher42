@@ -6,7 +6,7 @@
 /*   By: xiwang <xiwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:12:06 by xiwang            #+#    #+#             */
-/*   Updated: 2023/11/23 20:38:27 by xiwang           ###   ########.fr       */
+/*   Updated: 2023/11/24 19:12:14 by xiwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,11 @@ int	main(int ac, char **av)
 	{
 		data = (t_data *)malloc(sizeof(t_data));
 		if (check_input(av) == ERROR)
-			return (ft_return("check_input failed"));
+			return (ft_return("Error"));
 		if (parse_input(data, av) == ERROR)
-			return (ft_return("parse_input failed"));
+			return (ft_return("Error"));
 		if (init_data(data) == ERROR)
-			return (ft_return("init_data failed"));
-		//if (data->meals_must_have == 0) //0 will not pass the input check
-		//	return (ft_return("0 meals"));
+			return (ft_return("Error"));
 		start_threads(data);
 		print_meals(data);
 		destroy_mutexes(data);
