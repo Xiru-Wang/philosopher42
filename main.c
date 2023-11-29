@@ -6,7 +6,7 @@
 /*   By: xiwang <xiwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:12:06 by xiwang            #+#    #+#             */
-/*   Updated: 2023/11/24 19:12:14 by xiwang           ###   ########.fr       */
+/*   Updated: 2023/11/28 12:58:13 by xiwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	main(int ac, char **av)
 	if (ac == 5 || ac == 6)
 	{
 		data = (t_data *)malloc(sizeof(t_data));
+		if (!data)
+			return (ERROR);
 		if (check_input(av) == ERROR)
 			return (ft_return("Error"));
 		if (parse_input(data, av) == ERROR)

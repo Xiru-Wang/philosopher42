@@ -6,7 +6,7 @@
 /*   By: xiwang <xiwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:11:52 by xiwang            #+#    #+#             */
-/*   Updated: 2023/11/23 15:13:16 by xiwang           ###   ########.fr       */
+/*   Updated: 2023/11/28 14:01:08 by xiwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	init_data(t_data *data)
 	i = 0;
 	data->philos = malloc(sizeof(t_philo) * data->num_philos);
 	data->forks = malloc(sizeof(t_fork) * data->num_philos);
+	if (!data->philos || !data->forks)
+		return (ft_return("Malloc failed"));
 	if (!data->philos || !data->forks)
 		return (ft_return("Malloc Error"));
 	while (i < data->num_philos)
