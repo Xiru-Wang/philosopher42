@@ -1,13 +1,13 @@
 # philosopher42
-Brief
+
 The Dining Philosophers problem is a classic practice exercise in computer science for understanding and dealing with concurrency issues in multi-threading environments. 
 
-The problem illustrates synchronization issues and techniques for resolving them. It involves a certain number of philosophers seated around a circular table, and the challenge is to design a protocol that allows them to eat and think without running into deadlocks (where they are stuck waiting indefinitely) or resource starvation (where one or more philosophers are unable to access the resources they need to continue).
+The problem illustrates synchronization issues and techniques for resolving them. It involves a certain number of philosophers seated around a circular table, and the challenge is to design a protocol that allows them to eat, sleep, and think without running into deadlocks (where they are stuck waiting indefinitely) or resource starvation (where one or more philosophers are unable to access the resources they need to continue).
 
-Each philosopher alternates between thinking and eating. To eat, a philosopher must have two forks (or resources), one from their left and one from their right, but each fork is shared with a neighbor. The problem becomes how to devise a strategy where philosophers do not deadlock (waiting indefinitely for a fork) and do not starve (being forever denied access to a fork).
+To eat, a philosopher must have two forks (or resources), one from their left and one from their right, but each fork is shared with a neighbor. The problem becomes how to devise a strategy where philosophers do not deadlock (waiting indefinitely for a fork) and do not starve (being forever denied access to a fork).
 
 # Some thoughts...
-1. If (time_to_die < 2 * time_to_eat), DIE
+1. If (time_to_die <= 2 * time_to_eat), DIE
 2. Without thinking time, after philos reach certain meals（70-80 times of the simulation）, meals distribute unfairly and lead to one philo die
 3. Philo-5 (if we have 5 philos) eat as long as the second fork is available (had too many unnecessary meals)
 4. How should we control the thinking time??🤔 the best scenario: thinking = time_to_die - eating - sleeping (minus some buffer time for the operating system), then start to eat immediately.
